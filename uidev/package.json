@@ -1,0 +1,30 @@
+{
+	"name": "uidev",
+	"version": "0.1.0",
+	"private": true,
+	"dependencies": {
+		"axios": "^0.18.0",
+		"react": "^16.5.2",
+		"react-dom": "^16.5.2",
+		"react-scripts": "2.0.5",
+		"styled-components": "^4.0.2",
+		"styled-reset": "^1.6.0",
+		"typography": "^0.16.17"
+	},
+	"scripts": {
+		"start": "BROWSER=false react-scripts start",
+		"build": "react-scripts build && rm -rf ../build && mv build ..",
+		"test": "react-scripts test",
+		"eject": "react-scripts eject"
+	},
+	"homepage": "./",
+	"eslintConfig": {
+		"extends": "react-app"
+	},
+	"browserslist": [
+		">0.2%",
+		"not dead",
+		"not ie <= 11",
+		"not op_mini all"
+	]
+}
