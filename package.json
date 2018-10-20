@@ -1,0 +1,28 @@
+{
+	"name": "nomadcoin-wallet",
+	"version": "1.0.0",
+	"description": "deskTop wallet using Electron",
+	"main": "main.js",
+	"dependencies": {
+		"get-port": "^4.0.0"
+	},
+	"devDependencies": {
+		"concurrently": "^4.0.1",
+		"electron": "^3.0.5"
+	},
+	"scripts": {
+		"start": "concurrently --kill-others \"yarn run startReact\" \"ENV=dev electron main.js\"",
+		"startReact": "cd uidev && npm start"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/dvsoo/nomadcoin-wallet.git"
+	},
+	"keywords": [],
+	"author": "dvsoo <qpzm2480@naver.com>",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/dvsoo/nomadcoin-wallet/issues"
+	},
+	"homepage": "https://github.com/dvsoo/nomadcoin-wallet#readme"
+}
