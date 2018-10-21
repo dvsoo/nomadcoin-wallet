@@ -19,6 +19,8 @@ class AppContainer extends Component {
 	state = {
 		isLoading: true,
 		isMining: false,
+		toAddress: '',
+		amount: 0,
 	};
 	static propTypes = {
 		sharedPort: PropTypes.number.isRequired,
@@ -26,13 +28,20 @@ class AppContainer extends Component {
 	componentDidMount = () => {
 		const { sharedPort } = this.props;
 		this._registerOnMaster(sharedPort);
-		this._getAddress(sharedPort);
 		this._getBalance(sharedPort);
+		this._getAddress(sharedPort);
 		setInterval(() => this._getBalance(sharedPort), 1000);
 	};
 	render() {
 		baseStyles();
-		return <AppPresenter {...this.state} mineBlock={this._mineBlock} />;
+		return (
+			<AppPresenter
+				{...this.state}
+				mineBlock={this._mineBlock}
+				handleInput={this._handleInput}
+				handleSubmit={this._handleSubmit}
+			/>
+		);
 	}
 	//masternode URL and WebSocket URL need
 	_registerOnMaster = async port => {
@@ -62,6 +71,27 @@ class AppContainer extends Component {
 		const request = await axios.post(`${SELF_NODE(sharedPort)}/blocks`);
 		this.setState({
 			isMining: false,
+		});
+	};
+	_handleInput = e => {
+		const {
+			target: { name, value },
+		} = e;
+		this.setState({
+			[name]: value,
+		});
+	};
+	_handleSubmit = async e => {
+		e.preventDefault();
+		const { sharedPort } = this.props;
+		const { amount, toAddress } = this.state;
+		const request = await axios.post(`${SELF_NODE(sharedPort)}/transactions`, {
+			amount: Number(amount),
+			address: toAddress,
+		});
+		this.setState({
+			amount: '',
+			toAddress: '',
 		});
 	};
 }
